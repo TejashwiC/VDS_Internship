@@ -1,18 +1,16 @@
-from functools import wraps
-
+from datetime import datetime
+import functools
 def daytime_only(func):
-    @wraps(func)
-    def wrapper():
-        current_hour = int(input("Enter current hour (0-23): "))
-        
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        current_hour = datetime.now().hour
         if 6 <= current_hour < 18:
-            return func()
+            return func(*args, **kwargs)
         else:
-            print("Function can only run during daytime (6 AM to 6 PM).")
+            return f"Function '{func._name_}' can only run between 6 AM and 6 PM."
     return wrapper
-
+print("Current Time:", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 @daytime_only
 def greet():
-    print("Good day! Function executed.")
-
-greet()
+    return "Good day! The function is running."
+print(greet())
