@@ -1,0 +1,2 @@
+hello world
+python is a programming language and it is easy to learn quickly.
